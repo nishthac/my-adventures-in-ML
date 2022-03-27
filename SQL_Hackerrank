@@ -24,3 +24,18 @@ Select 'There are a total of',(Select count(*) from OCCUPATIONS where Occupation
 Select 'There are a total of',(Select count(*) from OCCUPATIONS where Occupation ="Actor") as cc,'actors.' as P
 order by cc,p asc;
 
+Select c.company_code, c.founder, count(distinct l.lead_manager_code)as total_lead_manager,
+count(distinct s.senior_manager_code)as total_senior_manager,
+count(distinct m.manager_code) as total_managers,
+count(distinct e.employee_code) as total_employees
+from Company c
+left join Lead_manager l
+on c.company_code=l.company_code
+left join Senior_Manager s
+on l.lead_manager_code=s.lead_manager_code
+left join Manager m
+on s.senior_manager_code=m.senior_manager_code
+left join Employee e
+on m.manager_code=e.manager_code
+group by c.company_code,c.founder
+order by company_code;
