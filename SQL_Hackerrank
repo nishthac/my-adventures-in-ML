@@ -13,3 +13,14 @@ from(
   order by Name
     ) temp
 group by RowNumber;
+
+Select CONCAT(NAME,'(',(LEFT(Occupation,1)),')') from Occupations order by Name;
+Select 'There are a total of',(Select count(*) from OCCUPATIONS where Occupation ="Doctor") as cc,'doctors.' as P
+ UNION
+Select 'There are a total of',(Select count(*) from OCCUPATIONS where Occupation ="Professor") as cc,'professors.' as P
+ UNION
+Select 'There are a total of',(Select count(*) from OCCUPATIONS where Occupation ="Singer") as cc,'singers.' as P
+ UNION
+Select 'There are a total of',(Select count(*) from OCCUPATIONS where Occupation ="Actor") as cc,'actors.' as P
+order by cc,p asc;
+
