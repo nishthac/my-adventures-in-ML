@@ -63,6 +63,17 @@ where rnum1 =
             from 
 (select row_number() over (order by lat_n desc) as rnum from station) t);
 
+XXXXXXXXXXXXXXXXXXXXXXXXXX---------------XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+with swg as(select s.name,(select grade from grades g where s.marks >= g.min_mark and s.marks <= g.max_mark) as grade,s.marks
+from students s)
+
+Select 
+(Case when grade<8 then NULL
+ else Name
+ end) as newname,grade,marks
+from swg
+order by grade desc,newname asc,marks asc;
+
 
 
 
